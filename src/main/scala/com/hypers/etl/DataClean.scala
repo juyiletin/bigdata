@@ -35,7 +35,7 @@ object DataClean {
     val invalid = source.filter(source("pn_clean").===("invalid"))
     val valid = source.filter(source("pn_clean").=!=("invalid"))
     val tag_tmp = tag.map(row => {
-      Row(row.getString(0), row.getString(1).split(","))
+      (row.getString(0), row.getString(1).split(","))
     }).toDF("pn", "tags")
 
     val valid_tag: DataFrame = valid.join(tag_tmp, valid("pn_clean").===(tag_tmp("pn")), "left")
@@ -51,7 +51,7 @@ object DataClean {
         valid("pn_clean"),
         tag_tmp("tags"))
 
-    val valid_tmp: Dataset[Row] = valid_tag.na.fill("invalid")
+    val valid_tmp: DataFrame = valid_tag.na.fill("invalid")
       .map(row => {
         var age = row.getString(3)
         var gender_clean = row.getString(5)
