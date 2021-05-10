@@ -14,6 +14,7 @@ object Test {
       .appName("Test")
       .enableHiveSupport()
       .getOrCreate()
+
     import spark.implicits._
 
     val rdd1: RDD[(Double, (Long, String))] = spark.read.table("movie.title_ratings")

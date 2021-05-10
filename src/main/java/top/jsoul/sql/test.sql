@@ -1,0 +1,1 @@
+insert into test.test_canal select * from canal.test_canal;
