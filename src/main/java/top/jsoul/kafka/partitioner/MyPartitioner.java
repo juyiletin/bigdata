@@ -11,12 +11,14 @@ import java.util.Map;
 
 public class MyPartitioner implements Partitioner {
 
+    @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
         int numPartitions = partitions.size();
 
-        if ((keyBytes == null)||(!(key instanceof String)))
+        if ((keyBytes == null)||(!(key instanceof String))) {
             throw new InvalidRecordException("We expect all messages to have customer name as key");
+        }
 
         //Banana被分到最后一个分区，其他随机
         if (((String)key).equals("Banana")){
@@ -26,9 +28,11 @@ public class MyPartitioner implements Partitioner {
         }
     }
 
+    @Override
     public void close() {
     }
 
+    @Override
     public void configure(Map<String, ?> map) {
     }
 }

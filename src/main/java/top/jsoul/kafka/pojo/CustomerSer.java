@@ -7,6 +7,7 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 
 public class CustomerSer implements Serializer<Customer> {
+    @Override
     public void configure(Map<String, ?> map, boolean b) {
     }
 
@@ -15,13 +16,14 @@ public class CustomerSer implements Serializer<Customer> {
      * @param customer 要被序列化的Customer
      * @return 被序列化后的字节数组：ID为4字节整数，Name长度的4字节整数，Name的内容n字节。
      */
+    @Override
     public byte[] serialize(String topic, Customer customer) {
         try {
             byte[] serializedName;
             int stringSize;
-            if (customer == null)
+            if (customer == null) {
                 return null;
-            else {
+            } else {
                 if (customer.getCustomerName() != null) {
                     serializedName = customer.getCustomerName().getBytes("UTF-8");
                     stringSize = customer.getCustomerName().length();
@@ -40,6 +42,7 @@ public class CustomerSer implements Serializer<Customer> {
         }
     }
 
+    @Override
     public void close() {
     }
 }
