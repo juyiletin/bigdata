@@ -8,31 +8,26 @@
     <artifactId>bigdata</artifactId>
     <version>1.0</version>
 
-    <repositories>
-        <repository>
-            <id>google</id>
-            <url>https://maven.aliyun.com/repository/google</url>
-        </repository>
-        <repository>
-            <id>cloudera</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-        </repository>
-        <repository>
-            <id>confluent</id>
-            <url>https://packages.confluent.io/maven/</url>
-        </repository>
-    </repositories>
+    <!--    <repositories>-->
+    <!--        <repository>-->
+    <!--            <id>cloudera</id>-->
+    <!--            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>-->
+    <!--        </repository>-->
+    <!--    </repositories>-->
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <flume.version>1.9.0-cdh6.2.1</flume.version>
-        <hadoop.version>3.0.0-cdh6.2.1</hadoop.version>
-        <hive.version>2.1.1-cdh6.2.1</hive.version>
-        <spark.version>2.4.0-cdh6.2.1</spark.version>
-        <kafka.version>2.1.0-cdh6.2.1</kafka.version>
-        <hbase.version>2.1.0-cdh6.2.1</hbase.version>
-        <avro.version>1.8.2-cdh6.2.1</avro.version>
+        <encoding>UTF-8</encoding>
+        <scala.version>2.11.12</scala.version>
+        <scala.compat.version>2.11</scala.compat.version>
+        <flume.version>1.9.0</flume.version>
+        <hadoop.version>2.7.1</hadoop.version>
+        <hive.version>2.1.1</hive.version>
+        <spark.version>2.4.0</spark.version>
+        <kafka.version>2.1.0</kafka.version>
+        <hbase.version>2.1.0</hbase.version>
+        <flink.version>1.9.0</flink.version>
     </properties>
 
     <dependencies>
@@ -56,26 +51,11 @@
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>${hadoop.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>${hadoop.version}</version>
-        </dependency>
 
         <!--hive-->
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
-            <version>${hive.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hive</groupId>
-            <artifactId>hive-common</artifactId>
             <version>${hive.version}</version>
         </dependency>
         <dependency>
@@ -102,11 +82,6 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_2.11</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming_2.11</artifactId>
             <version>${spark.version}</version>
         </dependency>
@@ -129,22 +104,7 @@
         <!--kafka-->
         <dependency>
             <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-            <version>${kafka.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
             <artifactId>connect-api</artifactId>
-            <version>${kafka.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>connect-transforms</artifactId>
-            <version>${kafka.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>connect-json</artifactId>
             <version>${kafka.version}</version>
         </dependency>
         <dependency>
@@ -159,29 +119,43 @@
             <artifactId>hbase-client</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-common</artifactId>
-            <version>${hbase.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-server</artifactId>
-            <version>${hbase.version}</version>
-        </dependency>
 
-        <!--arvo-->
+        <!--        flink-->
         <dependency>
-            <groupId>org.apache.avro</groupId>
-            <artifactId>avro</artifactId>
-            <version>${avro.version}</version>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
         </dependency>
-
-        <!--schema-registry-->
         <dependency>
-            <groupId>io.confluent</groupId>
-            <artifactId>kafka-avro-serializer</artifactId>
-            <version>5.1.4</version>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-scala_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-java</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-scala_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka-0.11_2.11</artifactId>
+            <version>${flink.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -196,5 +170,28 @@
             <version>3.6.1</version>
         </dependency>
     </dependencies>
+
+    <build>
+    <plugins>
+        <plugin>
+            <!-- 这是个编译scala代码的 -->
+            <groupId>net.alchim31.maven</groupId>
+            <artifactId>scala-maven-plugin</artifactId>
+            <version>3.2.0</version>
+            <configuration>
+                <recompileMode>incremental</recompileMode>
+            </configuration>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>compile</goal>
+                        <goal>testCompile</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+    </build>
+
 
 </project>
